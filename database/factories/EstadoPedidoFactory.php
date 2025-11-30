@@ -17,7 +17,7 @@ class EstadoPedidoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => $this->faker->randomElement(['pendiente', 'en proceso', 'terminado', 'entregado']),
         ];
     }
 }

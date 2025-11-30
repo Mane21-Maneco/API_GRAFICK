@@ -5,8 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Producto extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductoFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'costo_compra',
+        'precio_venta',
+        'descripcion',
+    ];
+
+    // Relación: un producto tiene muchas variantes
+    public function variantes()
+    {
+        return $this->hasMany(ProductoVariante::class);
+    }
 }

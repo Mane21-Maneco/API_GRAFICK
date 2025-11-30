@@ -17,7 +17,11 @@ class ServicioFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nombre' => $this->faker->word,
+            'tipo' => $this->faker->randomElement(['sublimación', 'diseño', 'corte']),
+            'costo' => $this->faker->randomFloat(2, 10, 100),
+            'precio' => $this->faker->randomFloat(2, 20, 200),
+            'descripcion' => $this->faker->sentence,
         ];
     }
 }

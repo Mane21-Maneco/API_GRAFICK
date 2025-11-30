@@ -17,7 +17,10 @@ class ProductoVarianteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'producto_id' => \App\Models\Producto::factory(),
+            'color' => $this->faker->safeColorName,
+            'talla' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
+            'sku' => $this->faker->unique()->ean8,
         ];
     }
 }

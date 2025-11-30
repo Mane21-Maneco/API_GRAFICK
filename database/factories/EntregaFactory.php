@@ -17,7 +17,12 @@ class EntregaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'pedido_id' => \App\Models\Pedido::factory(),
+            'fecha_programada' => $this->faker->dateTime(),
+            'fecha_entregada' => $this->faker->optional()->dateTime(),
+            'recibio_cliente' => $this->faker->name,
+            'ubicacion' => $this->faker->address,
+            'notas' => $this->faker->sentence,
         ];
     }
 }

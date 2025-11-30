@@ -17,7 +17,9 @@ class PedidoEstadosHistorialFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'pedido_id' => \App\Models\Pedido::factory(),
+            'estado' => $this->faker->randomElement(['pendiente', 'en proceso', 'terminado', 'entregado']),
+            'fecha' => $this->faker->dateTime(),
         ];
     }
 }
