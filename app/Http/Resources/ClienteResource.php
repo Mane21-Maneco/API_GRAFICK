@@ -20,8 +20,6 @@ class ClienteResource extends JsonResource
             'telefono' => $this->telefono,
             'direccion' => $this->direccion,
             'correo' => $this->correo,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

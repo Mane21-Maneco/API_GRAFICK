@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\ClienteResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClienteRequest;
+use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
 
 class ClienteController extends Controller
@@ -14,8 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-      $clientes = Cliente::all();
-      return ClienteResource::collection($clientes);
+            return ClienteResource::collection(Cliente::all());
     }
 
     /**
@@ -23,6 +24,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
+        // For API-based controllers, `create` is not typically used.
+        // Return an empty 204 or the list — here we return the list.
         $clientes = Cliente::all();
         return ClienteResource::collection($clientes);
     }
@@ -30,18 +33,18 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        $clientes = Cliente::all();
-        return ClienteResource::collection($clientes);
+        $data = $request->validated();
+        $cliente = Cliente::create($data);
+        return (new ClienteResource($cliente))->response()->setStatusCode(201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
         return new ClienteResource($cliente);
     }
 
@@ -56,11 +59,12 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
-        return new ClienteResource($cliente);
+        $cliente->update($request->validated());
+        return (new ClienteResource($cliente))->response()->setStatusCode(200);
     }
+   
 
     /**
      * Remove the specified resource from storage.
