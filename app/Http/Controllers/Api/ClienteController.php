@@ -17,6 +17,7 @@ class ClienteController extends Controller
     public function index()
     {
             return ClienteResource::collection(Cliente::all());
+            
     }
 
     /**
@@ -62,6 +63,7 @@ class ClienteController extends Controller
     public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
         $cliente->update($request->validated());
+        $cliente->refresh();
         return (new ClienteResource($cliente))->response()->setStatusCode(200);
     }
    

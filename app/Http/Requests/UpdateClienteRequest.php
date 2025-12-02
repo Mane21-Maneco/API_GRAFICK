@@ -31,21 +31,12 @@ class UpdateClienteRequest extends FormRequest
             ],
         ];
     }
-
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if (empty($this->all())) {
-                $validator->errors()->add('fields', 'Debes enviar al menos un campo para actualizar.');
-            }
-        });
-    }
-
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'message' => 'Validation errors',
-            'errors' => $validator->errors(),
+            'message' => 'Error de validación en la actualización',
+            'errors' => $validator->errors()
         ], 422));
+
     }
 }
